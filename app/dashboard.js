@@ -10,10 +10,19 @@ document.addEventListener("DOMContentLoaded", function() {
     let totales_compartment = document.querySelector("#totales")
     let iva = document.querySelector("#montoiva")
     let isr = document.querySelector("#montoisr")
+    let salariofijo = document.querySelector("#salariofijo")
 
     // cuando se da click a agregar
 
-    agregar_participaciones_button.addEventListener("click",function(){
+    let salario = 0
+
+    salariofijo.addEventListener("input",function(){
+        let salarioint = parseInt(this.value) 
+        salario = salarioint || 0
+        calculartotal()
+    })
+
+    agregar_participaciones_button.addEventListener("click",function (){
 
         let newParticipacion = participaciones_compartment.content.cloneNode(true)
         let newmonto = newParticipacion.querySelector("[name='montoparticipacion']")
@@ -35,8 +44,8 @@ document.addEventListener("DOMContentLoaded", function() {
         });
         // aqui es donde se display el subtotal compartment
         totales_compartment.classList.remove("hidden")
+        
     })
-
 
     // sumatoria de subtotales
     function updateSubtotal(montoElement, porcentajeElement, subtotalElement) {
@@ -46,21 +55,23 @@ document.addEventListener("DOMContentLoaded", function() {
         let subtotalcalculonumber = numeral(subtotalcalculo)
         let subtotalfinal = numeral(subtotalcalculonumber).format("0,") 
         subtotalElement.textContent = `$ ${subtotalfinal}`;
-        calculateGrandTotal(subtotalfinal);
+        calculartotal()
     }
 
-    // calcula el subtotal final
-    function calculateGrandTotal() {
-        let grandSubTotal = 0;
-        // Loops en todos los subtotales de dump_de_participaciones
-        dump_de_participaciones.querySelectorAll("#subtotal").forEach(subtotalElement => {
-            let subtotalValue = parseInt(subtotalElement.textContent.replace(/[^0-9]+/g,"")) || 0;
-            grandSubTotal += subtotalValue ;
-            calculo(grandSubTotal)
-        });
-        // esto actualiza el sub total final
-        sumatoriasubtotales.textContent = `$ ${numeral(grandSubTotal).format("0,")}`;
-    }
+        // calculateGrandTotal()
+        function calculartotal(){
+
+            let grandSubTotal = 0 + salario
+            // Loops en todos los subtotales de dump_de_participaciones
+            dump_de_participaciones.querySelectorAll("#subtotal").forEach(subtotalElement => {
+                let subtotalValue = parseInt(subtotalElement.textContent.replace(/[^0-9]+/g,"")) || 0;
+                grandSubTotal += subtotalValue ;
+                calculo(grandSubTotal)
+            });
+            // esto actualiza el sub total final
+            sumatoriasubtotales.textContent = `$ ${numeral(grandSubTotal).format("0,")}`;
+
+        }
 
 
     // esta funcion envia el calculo para realizar el total
