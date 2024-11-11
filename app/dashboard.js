@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
         let salarioint = parseInt(this.value) 
         salario = salarioint || 0
         calculartotal()
+
     })
 
     agregar_participaciones_button.addEventListener("click",function (){
@@ -44,6 +45,9 @@ document.addEventListener("DOMContentLoaded", function() {
         });
         // aqui es donde se display el subtotal compartment
         totales_compartment.classList.remove("hidden")
+
+        calculartotal(subtotal)
+        
         
     })
 
