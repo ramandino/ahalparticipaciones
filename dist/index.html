@@ -54,11 +54,11 @@
                     <div class="flex flex-row gap-8">
                         <div class="w-full flex flex-col">
                             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre Colaborador</label>
-                            <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nombre" required="">
+                            <input type="text" name="nombrecola" id="nombrecola" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nombre" required="">
                         </div>
                         <div class="w-full flex flex-col">
                             <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                            <input type="text" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="nombre@ahalfinancial.com" required="">
+                            <input type="text" name="emailcola" id="emailcola" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="nombre@ahalfinancial.com" required="">
                         </div>    
                     </div>    
                     <div class="mt-6 border-gray-300 border "></div>
@@ -131,7 +131,7 @@
                             <template id="participacion_compartment">
                                 <tr class="bg-white border-b dark:bg-gray-800 border-none dark:border-gray-700">
                                     <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        <input type="text" name="participacion1" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Participacion en XXXX" required="">
+                                        <input type="text" name="participacion1" id="nombreproyecto" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Pemer" required="">
                                     </td>
                                     <td class="px-6 py-4">
                                         <input type="number" name="montoparticipacion" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="XXXX" required=""> 
@@ -195,12 +195,65 @@
                     <div id="total" class="pl-16 ml-1 text-sm font-bold align-bottom">$ 0</div>
                 </td>
                 </table>
-
+                <button type="button" id="print" class="hover:bg-blue-700 items-center mr-20 bg-blue-900 px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800">
+                    Imprimir PDF
+                </button>
             </div>
-            
         </div>
-        
-        
+
+        <div id="aquivaeltemplate">
+            <template id="bodyestado" class=" hidden bg-white w-[210mm] h-[297mm] relative my-10 mx-auto">
+                <div class="mx-16">
+                    <div class="pt-14 flex gap-4">
+                        <img src="/img/ahal-logo.png" class="h-14" alt="logo ahal">
+                        <span class="self-center text-3xl font-semibold whitespace-nowrap dark:text-white">participahal</span>
+                    </div>
+                    <div class="flex mt-6">
+                        <div class="ml-auto text-right">
+                            Avenida Bonampak, Sm. 6 <br> Mz. 1, Lt. 1, Cancún <br> Quintana Roo, 77500 Piso 5
+                        </div>
+                    </div>
+                    <div class="mt-14 font-medium flex flex-col">
+                        <div id="colaboradoredo">Colaborador: </div>
+                        <div id="correoedo">Correo: </div>
+                        <div id="fechaedo">Fecha: </div>
+                        <span class="text-2xl mt-14 font-semibold whitespace-nowrap dark:text-white border-b-2">Estado de Cuenta</span>
+                    </div>
+
+                    <div class="mt-8 font-normal flex mb-2 ">
+                        <div class="w-80">Percepción Fija: </div>
+                        <div id="montoedo" class="">7500 MXN</div>
+                    </div>
+                    <!-- aqui van las participaciones -->
+                    <div id="dumpedo"class="flex flex-col"> 
+                        
+                    </div>
+                    <!-- compartments -->
+                    <div class="flex absolute right-2 bottom-36 mr-16 flex-col min-w-16 max-w-64 font-semibold">
+                        <!-- subtotal -->
+                        <div id="subtotaledo" class="flex">
+                            <div class="w-24">Subtotal:</div>
+                            <div></div>
+                        </div>
+                        <!-- iva -->
+                        <div id="ivaedo" class="flex">
+                            <div class="w-24">Ret.IVA:</div>
+                            <div></div>
+                        </div>
+                        <!-- isr -->
+                        <div id="isredo" class="flex">
+                            <div class="w-24">Ret.ISR:</div>
+                            <div></div>
+                        </div>
+                        <!-- total -->
+                        <div id="totaledo" class="font-black flex w-16">
+                            <div class="w-24">Total:</div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div> 
     </section>
 
 
@@ -212,9 +265,11 @@
             <span class="text-sm  sm:text-center dark:text-gray-400"> creado y diseñado por Ramiro. <a href="" class="hover:underline"></a></span>
         </div>
     </footer>
-    <script type="text/javascript" src="/app/dashboard.js"></script>
+    <script type="module" src="/app/dashboard.js"></script>
+    <script type="module" src="/app/generateedocta.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" integrity="sha512-YcsIPGdhPK4P/uRW6/sruonlYj+Q7UHWeKfTAkBW+g83NKM+jMJFJ4iAPfSnVp7BKD4dKMHmVSvICUbE/V1sSw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     
 
 
