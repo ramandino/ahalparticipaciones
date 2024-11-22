@@ -958,6 +958,10 @@ no-spin {
   right: 2rem;
 }
 
+.bottom-0 {
+  bottom: 0px;
+}
+
 .z-10 {
   z-index: 10;
 }
@@ -1037,6 +1041,26 @@ no-spin {
 
 .mt-8 {
   margin-top: 2rem;
+}
+
+.mt-auto {
+  margin-top: auto;
+}
+
+.mb-20 {
+  margin-bottom: 5rem;
+}
+
+.mt-48 {
+  margin-top: 12rem;
+}
+
+.mt-36 {
+  margin-top: 9rem;
+}
+
+.mt-52 {
+  margin-top: 13rem;
 }
 
 .block {
@@ -1135,6 +1159,10 @@ no-spin {
   width: 100%;
 }
 
+.w-36 {
+  width: 9rem;
+}
+
 .min-w-16 {
   min-width: 4rem;
 }
@@ -1149,6 +1177,26 @@ no-spin {
 
 .max-w-screen-xl {
   max-width: 1280px;
+}
+
+.max-w-28 {
+  max-width: 7rem;
+}
+
+.max-w-20 {
+  max-width: 5rem;
+}
+
+.max-w-40 {
+  max-width: 10rem;
+}
+
+.max-w-48 {
+  max-width: 12rem;
+}
+
+.max-w-52 {
+  max-width: 13rem;
 }
 
 .flex-grow {

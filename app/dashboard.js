@@ -12,13 +12,13 @@ let iva = document.querySelector("#montoiva")
 let isr = document.querySelector("#montoisr")
 let salariofijo = document.querySelector("#salariofijo")
 
-let nombrecolaborador = document.querySelector("[name='nombrecola']")
-let emailcolaborador = document.querySelector("[name='emailcola']")
+let nombrecolaborador = document.querySelector("#nombrecola")
+let emailcolaborador = document.querySelector("#emailcola")
 
-let nombrevalor = ""
-let emailvalor = ""
+export let nombrevalor = ""
+export let emailvalor = ""
+
 export let participacionesData = [];
-
 
 nombrecolaborador.addEventListener("input",function(){
     nombrevalor = nombrecolaborador.value
@@ -27,14 +27,14 @@ emailcolaborador.addEventListener("input",function(){
     emailvalor = emailcolaborador.value
 })
 
-export function colaInfo(){
-    return {
-        nombre : nombrevalor,
-        email : emailvalor}
-}
+// export function colaInfo(){
+//     return {
+//         nombre : nombrevalor,
+//         email : emailvalor}
+// }
 // cuando se da click a agregar
 
-let salario = 0
+export let salario = 0
 
 salariofijo.addEventListener("input",function(){
     let salarioint = parseInt(this.value) 
@@ -43,9 +43,7 @@ salariofijo.addEventListener("input",function(){
     
 })
 
-export function getSalario() {
-    return salario ;
-}
+
 
 agregar_participaciones_button.addEventListener("click",function (){
 
@@ -70,8 +68,6 @@ agregar_participaciones_button.addEventListener("click",function (){
     
 
 
-
-
     dump_de_participaciones.appendChild(newParticipacion)
 
     newmonto.addEventListener("input", function() {
@@ -90,18 +86,6 @@ agregar_participaciones_button.addEventListener("click",function (){
 
 })
 
-
-
-
-
-
-// export function dump_participaciones (){
-//     return {
-//         proyectonombre : proyecto_EDO,
-//         subtotalproyecto : subtotal_EDO
-        
-//     }
-// }
 
 // sumatoria de subtotales
 function updateSubtotal(montoElement, porcentajeElement, subtotalElement,participationEntry) {
@@ -147,10 +131,10 @@ function calculo (subtotal) {
 }
 
 // funcion para print el total
-let ivavalor = 0
-let isrvalor = 0
-let totalFinal = 0
-let total = 0
+export let ivavalor = 0
+export let isrvalor = 0
+export let totalFinal = 0
+export let total = 0
 
 function calculateTotal(totaledo,ivaelement,isrelement){
     let totalcompartment = document.querySelector("#total")
@@ -162,15 +146,15 @@ function calculateTotal(totaledo,ivaelement,isrelement){
     
 };    
 
-export function totales(){
-    return{
-        iva : ivavalor,
-        isr : isrvalor,
-        subtotal : total,
-        total : totalFinal,
+// export function totales(){
+//     return{
+//         iva : ivavalor,
+//         isr : isrvalor,
+//         subtotal : total,
+//         total : totalFinal,
         
-    }
-}
+//     }
+// }
 
     
 

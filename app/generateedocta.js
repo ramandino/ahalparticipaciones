@@ -1,21 +1,19 @@
 
-import { getSalario, colaInfo, totales, participacionesData} from "./dashboard.js";
+import { salario, nombrevalor,emailvalor,ivavalor,isrvalor,totalFinal,total , participacionesData} from "./dashboard.js";
 
 
 // template que se va a clone
-let aquivaeltemplate = document.getElementById("aquivaeltemplate")
+
 let template_edo = document.getElementById("bodyestado")
 let print = document.querySelector("#print")
+let fecha = new Date()
 
-const salario = getSalario()
-const fecha = new Date().toString()
-const {nombre,email} = colaInfo()
-const {iva,isr,subtotal,total} = totales()
 
 
 
 print.addEventListener("click", function(){
 
+    let aquivaeltemplate = document.getElementById("aquivaeltemplate")
     let new_Template_Edo = template_edo.content.cloneNode(true)
     let colaboradoredo = new_Template_Edo.querySelector("#colaboradoredo")
     let correoedo = new_Template_Edo.querySelector("#correoedo")
@@ -26,31 +24,39 @@ print.addEventListener("click", function(){
     let isredo = new_Template_Edo.querySelector("#isredo")
     let totaledo = new_Template_Edo.querySelector("#totaledo")
     let dumpedo = new_Template_Edo.querySelector("#dumpedo")
+    let edocompartimientodetotales = new_Template_Edo.querySelector("#edocompartimientodetotales")
 
-    salarioedo.textContent = `${salario}`
-    colaboradoredo.textContent = `${nombre}`
-    correoedo.textContent = `${email}`
-    fechaedo.textContent = `${fecha}`
-    subtotaledo.textContent = `${subtotal}`
-    ivaedo.textContent = `${iva}`
-    isredo.textContent = `${isr}`
-    totaledo.textContent = `${total}`
 
-    console.log(participacionesData)
-    console.log(dumpedo)
-
-    // participacionesData.forEach(entry => {
-    //     dumpedo.innerHTML += `
-    // <div class="font-normal flex mb-2 ">
-    //     <div class="w-80">${entry.proyecto}</div>
-    //     <div>${entry.subtotal}MXN</div>
-    // </div>`       
-    // })
+    colaboradoredo.textContent =  `Colaborador: ${nombrevalor}`
+    correoedo.textContent = `Correo: ${emailvalor}`
+    fechaedo.textContent = `Fecha: ${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
     
-    // aquivaeltemplate.appendChild(new_Template_Edo)
-    // let element = document.getElementById("aquivaeltemplate")
-    // html2pdf(element); 
-    // aquivaeltemplate.classList.add("hidden");
+    salarioedo.textContent = `$${salario} MXN`
+
+    participacionesData.forEach(entry => {
+        dumpedo.innerHTML += `
+    <div class="font-normal flex mb-2 ">
+        <div class="w-80">${entry.proyecto}:</div>
+        <div>$${entry.subtotal} MXN</div>
+    </div>`       
+    })
+
+
+    subtotaledo.textContent += `${total}`
+    ivaedo.textContent += `${ivavalor}`
+    isredo.textContent += `${isrvalor}`
+    totaledo.textContent += `$${totalFinal} MXN`
+    
+    aquivaeltemplate.appendChild(new_Template_Edo)
+    html2pdf(aquivaeltemplate);
+
+
+    setTimeout(function() {
+
+        aquivaeltemplate.classList.add("hidden");
+
+    }, 100); // 
+
 })
 
 
