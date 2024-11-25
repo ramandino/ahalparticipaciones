@@ -1,62 +1,49 @@
 
 import { salario, nombrevalor,emailvalor,ivavalor,isrvalor,totalFinal,total , participacionesData} from "./dashboard.js";
 
-
-// template que se va a clone
-
-let template_edo = document.getElementById("bodyestado")
-let print = document.querySelector("#print")
+let template_EstadodeCuenta = document.getElementById("bodyestado")
+let btn_Imprimir = document.querySelector("#print")
 let fecha = new Date()
 
+btn_Imprimir.addEventListener("click", function(){
+    let template_Holder = document.getElementById("aquivaeltemplate")
+    let nuevotemplate_paraEdo = template_EstadodeCuenta.content.cloneNode(true)
+    let colaboradoredo = nuevotemplate_paraEdo.querySelector("#colaboradoredo")
+    let correo_Edo = nuevotemplate_paraEdo.querySelector("#correoedo")
+    let fecha_Edo = nuevotemplate_paraEdo.querySelector("#fechaedo")
+    let salario_Edo = nuevotemplate_paraEdo.querySelector("#montoedo")
+    let subtotal_Edo = nuevotemplate_paraEdo.querySelector("#subtotaledo")
+    let iva_Edo = nuevotemplate_paraEdo.querySelector("#ivaedo")
+    let isr_Edo = nuevotemplate_paraEdo.querySelector("#isredo")
+    let total_Edo = nuevotemplate_paraEdo.querySelector("#totaledo")
+    let dump_de_las_participaciones = nuevotemplate_paraEdo.querySelector("#dumpedo")
 
-
-
-print.addEventListener("click", function(){
-
-    let aquivaeltemplate = document.getElementById("aquivaeltemplate")
-    let new_Template_Edo = template_edo.content.cloneNode(true)
-    let colaboradoredo = new_Template_Edo.querySelector("#colaboradoredo")
-    let correoedo = new_Template_Edo.querySelector("#correoedo")
-    let fechaedo = new_Template_Edo.querySelector("#fechaedo")
-    let salarioedo = new_Template_Edo.querySelector("#montoedo")
-    let subtotaledo = new_Template_Edo.querySelector("#subtotaledo")
-    let ivaedo = new_Template_Edo.querySelector("#ivaedo")
-    let isredo = new_Template_Edo.querySelector("#isredo")
-    let totaledo = new_Template_Edo.querySelector("#totaledo")
-    let dumpedo = new_Template_Edo.querySelector("#dumpedo")
-    let edocompartimientodetotales = new_Template_Edo.querySelector("#edocompartimientodetotales")
-
-
+    // aqui se agregan la info inicial del colaborador + todas las participaciones en un loop
     colaboradoredo.textContent =  `Colaborador: ${nombrevalor}`
-    correoedo.textContent = `Correo: ${emailvalor}`
-    fechaedo.textContent = `Fecha: ${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
-    
-    salarioedo.textContent = `$${salario} MXN`
+    correo_Edo.textContent = `Correo: ${emailvalor}`
+    fecha_Edo.textContent = `Fecha: ${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
+    salario_Edo.textContent = `$${salario} MXN`
 
     participacionesData.forEach(entry => {
-        dumpedo.innerHTML += `
+        dump_de_las_participaciones.innerHTML += `
     <div class="font-normal flex mb-2 ">
         <div class="w-80">${entry.proyecto}:</div>
         <div>$${entry.subtotal} MXN</div>
     </div>`       
     })
 
+    //aqui se agregan los valores de totales 
+    subtotal_Edo.textContent += `${total}`
+    iva_Edo.textContent += `${ivavalor}`
+    isr_Edo.textContent += `${isrvalor}`
+    total_Edo.textContent += `$${totalFinal} MXN`
+    template_Holder.appendChild(nuevotemplate_paraEdo)
+    html2pdf(template_Holder);
 
-    subtotaledo.textContent += `${total}`
-    ivaedo.textContent += `${ivavalor}`
-    isredo.textContent += `${isrvalor}`
-    totaledo.textContent += `$${totalFinal} MXN`
-    
-    aquivaeltemplate.appendChild(new_Template_Edo)
-    html2pdf(aquivaeltemplate);
-
-
+    // agregada para que se pueda render el DOM y luego hide. 
     setTimeout(function() {
-
-        aquivaeltemplate.classList.add("hidden");
-
+        template_Holder.classList.add("hidden");
     }, 100); // 
-
 })
 
 

@@ -1,8 +1,4 @@
 
-
-let togglefactor = .75
-
-
 let dump_de_participaciones = document.getElementById("dump_de_participaciones")
 let participaciones_compartment = document.getElementById("participacion_compartment")
 let agregar_participaciones_button = document.getElementById("agregar_participacion")
@@ -11,9 +7,11 @@ let totales_compartment = document.querySelector("#totales")
 let iva = document.querySelector("#montoiva")
 let isr = document.querySelector("#montoisr")
 let salariofijo = document.querySelector("#salariofijo")
-
 let nombrecolaborador = document.querySelector("#nombrecola")
 let emailcolaborador = document.querySelector("#emailcola")
+
+let togglefactor = .75
+export let salario = 0
 
 export let nombrevalor = ""
 export let emailvalor = ""
@@ -27,26 +25,14 @@ emailcolaborador.addEventListener("input",function(){
     emailvalor = emailcolaborador.value
 })
 
-// export function colaInfo(){
-//     return {
-//         nombre : nombrevalor,
-//         email : emailvalor}
-// }
-// cuando se da click a agregar
-
-export let salario = 0
-
 salariofijo.addEventListener("input",function(){
     let salarioint = parseInt(this.value) 
     salario = salarioint || 0
     calculartotal()    
-    
 })
 
-
-
+//aqui es donde se escuchan los inputs de montos, cargo corpo y % de participación 
 agregar_participaciones_button.addEventListener("click",function (){
-
     let newParticipacion = participaciones_compartment.content.cloneNode(true)
     let newmonto = newParticipacion.querySelector("[name='montoparticipacion']")
     let newporcentaje = newParticipacion.querySelector("[name='porcentaje_participacion']")
@@ -56,7 +42,6 @@ agregar_participaciones_button.addEventListener("click",function (){
 
     proyecto.addEventListener("input",function(){
         participationEntry.proyecto = proyecto.value || "";
-
     })
 
     let participationEntry = {
@@ -65,9 +50,6 @@ agregar_participaciones_button.addEventListener("click",function (){
     };
 
     participacionesData.push(participationEntry);
-    
-
-
     dump_de_participaciones.appendChild(newParticipacion)
 
     newmonto.addEventListener("input", function() {
@@ -82,12 +64,10 @@ agregar_participaciones_button.addEventListener("click",function (){
     });
     // aqui es donde se display el subtotal compartment
     totales_compartment.classList.remove("hidden")
-
-
 })
 
 
-// sumatoria de subtotales
+// aqui se calcula el subtotal por participación
 function updateSubtotal(montoElement, porcentajeElement, subtotalElement,participationEntry) {
     let monto = parseFloat(montoElement.value) || 0;
     let porcentaje = parseFloat(porcentajeElement.value) || 0;
@@ -99,24 +79,21 @@ function updateSubtotal(montoElement, porcentajeElement, subtotalElement,partici
     calculartotal()
 }
 
-    // calculateGrandTotal()
-    function calculartotal(){
-
-        let grandSubTotal = 0 + salario
-        // Loops en todos los subtotales de dump_de_participaciones
-        dump_de_participaciones.querySelectorAll("#subtotal").forEach(subtotalElement => {
-            let subtotalValue = parseInt(subtotalElement.textContent.replace(/[^0-9]+/g,"")) || 0;
-            grandSubTotal += subtotalValue ;
-            calculo(grandSubTotal)
-        });
-        // esto actualiza el sub total final
-        sumatoriasubtotales.textContent = `$ ${numeral(grandSubTotal).format("0,")}`;
-
-
-    }
+// aqui se calcula el subtotal final de las participaciones + el salario fijo y se agrega al DOM.
+function calculartotal(){
+    let grandSubTotal = 0 + salario
+    // Loops en todos los subtotales de dump_de_participaciones
+    dump_de_participaciones.querySelectorAll("#subtotal").forEach(subtotalElement => {
+        let subtotalValue = parseInt(subtotalElement.textContent.replace(/[^0-9]+/g,"")) || 0;
+        grandSubTotal += subtotalValue ;
+        calculo(grandSubTotal)
+    });
+    // esto actualiza el sub total final
+    sumatoriasubtotales.textContent = `$ ${numeral(grandSubTotal).format("0,")}`;
+}
 
 
-// esta funcion envia el calculo para realizar el total
+// esta funcion escucha el input del iva e isr y lo envia a calulateTotal para poder sacar el Total Final
 function calculo (subtotal) {
     // IVA
     calculateTotal(subtotal,iva,isr)
@@ -130,7 +107,7 @@ function calculo (subtotal) {
     });
 }
 
-// funcion para print el total
+// aqui  se calculan los totales y tambien se exportan para la impresión del estado de cuenta
 export let ivavalor = 0
 export let isrvalor = 0
 export let totalFinal = 0
@@ -142,26 +119,6 @@ function calculateTotal(totaledo,ivaelement,isrelement){
     ivavalor = ivaelement.value || 0
     isrvalor = isrelement.value || 0
     totalFinal = total - ivavalor - isrvalor
-    totalcompartment.textContent = `$ ${numeral(totalFinal).format("0,")}`;
-    
+    totalcompartment.textContent = `$ ${numeral(totalFinal).format("0,")}`;    
 };    
-
-// export function totales(){
-//     return{
-//         iva : ivavalor,
-//         isr : isrvalor,
-//         subtotal : total,
-//         total : totalFinal,
-        
-//     }
-// }
-
-    
-
-        
-    
-    
-    
-    
-
 

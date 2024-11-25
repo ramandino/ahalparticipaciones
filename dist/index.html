@@ -11,6 +11,7 @@
 </head>
 
 <body class="mx-48 min-h-screen flex relative flex-col bg-white">
+    <!-- nav bar -->
     <nav class="border-gray-200 mt-4 sticky bg-white top-0 z-10 dark:bg-gray-900">
         <div class="max-w-screen-xl  flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
@@ -24,7 +25,6 @@
             </button>
 
             <!-- Dropdown menu -->
-
             <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
                 <div class="px-4 py-3">
                 <span class="block text-sm text-gray-900 dark:text-white">Ricardo</span>
@@ -46,7 +46,6 @@
     </nav>
 
     <!-- dashboard starts -->
-
     <section id="dashboard" class="bg-white  relative flex-grow dark:bg-gray-900">
         <div class="py-8 px-20 max-w-2xl lg:py-14">
             <h2 class="mb-4 text-2xl font-semibold dark:text-white">Crear estado de cuenta</h2>
@@ -68,7 +67,6 @@
         </div>                        
         
         <!-- participaciónes dashboard starts -->
-
         <div class="relative px-20 overflow-x-auto">
             <table class="text-sm w-full text-left  rtl:text-right  text-gray-500 dark:text-gray-400">
                 <caption class="text-gray-900 font-bold mb-4 text-left text-sm">1. Percepciones Fijas</caption>
@@ -98,8 +96,7 @@
                 </tbody>
             </table>
 
-            <!-- participaciones -->
-
+            <!-- agregar participaciones -->
             <table class="w-full sticky text-sm text-left mt-5 rtl:text-right text-gray-500 dark:text-gray-400">
                     <caption class="text-gray-900 font-bold mb-4 text-left text-sm">2. Participaciones</caption>
                     <button type="button" id="agregar_participacion" class="hover:bg-green-500 items-center absolute right-0 top-32 mr-20 bg-green-600 px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800">
@@ -159,6 +156,7 @@
                 </tbody>
             </table>
         </div>
+        <!-- compartimiento para los subtotales -->
         <div id="totales" class="hidden ml-auto mr-20 w-64">
             <div id="totalestemplate">
                 <div class=" border-gray-300 border"></div>
@@ -201,12 +199,12 @@
                 </button>
             </div>
         </div>
-
+        <!-- este es el hidden template donde se crea el print pdf -->
         <div id="aquivaeltemplate" class="">
             <template id="bodyestado" class=" bg-white w-[210mm] h-[297mm] relative my-10 mx-auto">
                 <div class="mx-16 relative">
                     <div class="pt-14 flex gap-4">
-                        <img src="/img/ahal-logo.png" class="h-14" alt="logo ahal">
+                        <img src="./img/ahal-logo.png" class="h-14" alt="logo ahal">
                         <span class="self-center text-3xl font-semibold whitespace-nowrap dark:text-white">participahal</span>
                     </div>
                     <div class="flex mt-6">
@@ -214,6 +212,7 @@
                             Avenida Bonampak, Sm. 6 <br> Mz. 1, Lt. 1, Cancún <br> Quintana Roo, 77500 Piso 5
                         </div>
                     </div>
+                    <!-- info de colaborador -->
                     <div class="mt-14 font-medium flex flex-col">
                         <div id="colaboradoredo">Colaborador: </div>
                         <div id="correoedo">Correo: </div>
@@ -221,14 +220,16 @@
                         <span class="text-2xl mt-14 font-semibold whitespace-nowrap dark:text-white border-b-2">Estado de Cuenta</span>
                     </div>
 
+                    <!-- salario fijo -->
                     <div class="mt-8 font-normal flex mb-2 ">
                         <div class="w-80">Percepción Fija: </div>
                         <div id="montoedo" class="">7500 MXN</div>
                     </div>
+
                     <!-- aqui van las participaciones -->
                     <div id="dumpedo"class="flex flex-col"> 
-
                     </div>
+
                     <!-- compartments -->
                     <div id="edocompartimientodetotales" class="flex flex-col ml-auto mt-52 min-w-16 max-w-52 font-semibold">
                         <!-- subtotal -->
@@ -257,22 +258,20 @@
         </div> 
     </section>
 
-
     <!-- footer starts -->
-
     <footer class="bg-white p-4 rounded-lg flex mt-6 mb-4 dark:bg-gray-800">
         <div class="w-full mx-auto max-w-screen-xl  md:flex md:items-center md:justify-between">
             <span class="text-sm sm:text-center dark:text-gray-400">participahal © 2024 <a href="" class="hover:underline"></a></span>
             <span class="text-sm  sm:text-center dark:text-gray-400"> creado y diseñado por Ramiro. <a href="" class="hover:underline"></a></span>
         </div>
     </footer>
+
+    <!-- js -->
     <script type="module" src="./app/dashboard.js"></script>
     <script type="module" src="./app/generateedocta.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" integrity="sha512-YcsIPGdhPK4P/uRW6/sruonlYj+Q7UHWeKfTAkBW+g83NKM+jMJFJ4iAPfSnVp7BKD4dKMHmVSvICUbE/V1sSw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     
-
-
 </body>
 </html>
