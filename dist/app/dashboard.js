@@ -69,8 +69,14 @@ agregar_participaciones_button.addEventListener("click",function (){
 
 // aqui se calcula el subtotal por participación
 function updateSubtotal(montoElement, porcentajeElement, subtotalElement,participationEntry) {
+    
     let monto = parseFloat(montoElement.value) || 0;
     let porcentaje = parseFloat(porcentajeElement.value) || 0;
+
+    if (porcentaje < 0 || porcentaje > 100 || isNaN(porcentaje)) {
+        alert("Por favor ingresa un numero entre 0-100.");
+    }
+    
     let subtotalcalculo = (monto * togglefactor * (porcentaje / 100)).toFixed(2);
     let subtotalcalculonumber = numeral(subtotalcalculo)
     let subtotalfinal = numeral(subtotalcalculonumber).format("0,") 
