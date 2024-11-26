@@ -3,11 +3,19 @@
 @import "tailwindcss/utilities";
 
 @layer base {
-    html {
+    .allfont {
         font-family: "Onest", sans-serif;
     }
-    no-spin {
+    .no-arrows {
+        -moz-appearance: textfield; /* Firefox */
+        -webkit-appearance: none; /* Chrome, Safari, Edge */
+        appearance: none; /* Standard */
+    
+        /* Optionally, hide spinners in Chrome */
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
         -webkit-appearance: none;
-        -moz-appearance: textfield;
+        margin: 0;
+        }
     }
 }
