@@ -952,6 +952,14 @@ input[type="range"]::-ms-fill-lower {
   top: 8rem;
 }
 
+.bottom-0 {
+  bottom: 0px;
+}
+
+.left-0 {
+  left: 0px;
+}
+
 .z-10 {
   z-index: 10;
 }
@@ -1035,6 +1043,10 @@ input[type="range"]::-ms-fill-lower {
 
 .mt-8 {
   margin-top: 2rem;
+}
+
+.ml-36 {
+  margin-left: 9rem;
 }
 
 .block {
@@ -1131,6 +1143,14 @@ input[type="range"]::-ms-fill-lower {
 
 .w-full {
   width: 100%;
+}
+
+.w-12 {
+  width: 3rem;
+}
+
+.w-auto {
+  width: auto;
 }
 
 .min-w-16 {

@@ -39,6 +39,8 @@ agregar_participaciones_button.addEventListener("click",function (){
     let newsubtotal = newParticipacion.querySelector("#subtotal")
     let toggle = newParticipacion.querySelector("[name='togglecargo']")
     let proyecto = newParticipacion.querySelector("#nombreproyecto")
+    let newcomercial = newParticipacion.querySelector("#comercial")
+
 
     proyecto.addEventListener("input",function(){
         participationEntry.proyecto = proyecto.value || "";
@@ -53,14 +55,17 @@ agregar_participaciones_button.addEventListener("click",function (){
     dump_de_participaciones.appendChild(newParticipacion)
 
     newmonto.addEventListener("input", function() {
-        updateSubtotal(newmonto, newporcentaje, newsubtotal,participationEntry);
+        updateSubtotal(newmonto, newporcentaje, newsubtotal,newcomercial,participationEntry);
     });
     newporcentaje.addEventListener("input", function() {
-        updateSubtotal(newmonto, newporcentaje, newsubtotal,participationEntry);
+        updateSubtotal(newmonto, newporcentaje, newsubtotal,newcomercial,participationEntry);
     });
     toggle.addEventListener("change", function() {
         togglefactor = this.checked ? 0.75 : 1 
-        updateSubtotal(newmonto, newporcentaje, newsubtotal,participationEntry);
+        updateSubtotal(newmonto, newporcentaje, newsubtotal,newcomercial,participationEntry);
+    });
+    newcomercial.addEventListener("input", function() {
+        updateSubtotal(newmonto, newporcentaje, newsubtotal,newcomercial,participationEntry);
     });
     // aqui es donde se display el subtotal compartment
     totales_compartment.classList.remove("hidden")
@@ -68,16 +73,17 @@ agregar_participaciones_button.addEventListener("click",function (){
 
 
 // aqui se calcula el subtotal por participación
-function updateSubtotal(montoElement, porcentajeElement, subtotalElement,participationEntry) {
+function updateSubtotal(montoElement, porcentajeElement, subtotalElement, comercialElement ,participationEntry) {
     
     let monto = parseFloat(montoElement.value) || 0;
     let porcentaje = parseFloat(porcentajeElement.value) || 0;
+    let comercial = parseFloat(comercialElement.value) || 0;
 
     if (porcentaje < 0 || porcentaje > 100 || isNaN(porcentaje)) {
         alert("Por favor ingresa un numero entre 0-100.");
     }
     
-    let subtotalcalculo = (monto * togglefactor * (porcentaje / 100)).toFixed(2);
+    let subtotalcalculo = ((monto * togglefactor * (porcentaje / 100)) + comercial).toFixed(2);
     let subtotalcalculonumber = numeral(subtotalcalculo)
     let subtotalfinal = numeral(subtotalcalculonumber).format("0,") 
     participationEntry.subtotal = subtotalfinal

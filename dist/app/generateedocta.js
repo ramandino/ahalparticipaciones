@@ -17,6 +17,7 @@ btn_Imprimir.addEventListener("click", function(){
     let isr_Edo = nuevotemplate_paraEdo.querySelector("#isredo")
     let total_Edo = nuevotemplate_paraEdo.querySelector("#totaledo")
     let dump_de_las_participaciones = nuevotemplate_paraEdo.querySelector("#dumpedo")
+    let nota = nuevotemplate_paraEdo.querySelector("#nota")
 
     // aqui se agregan la info inicial del colaborador + todas las participaciones en un loop
     colaboradoredo.textContent =  `Colaborador: ${nombrevalor}`
@@ -31,6 +32,7 @@ btn_Imprimir.addEventListener("click", function(){
         <div>$${entry.subtotal} MXN</div>
     </div>`       
     })
+
 
     //aqui se agregan los valores de totales 
     subtotal_Edo.textContent += `${total}`
